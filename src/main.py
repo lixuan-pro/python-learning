@@ -18,8 +18,18 @@ def main():
     student_scores=source.get_scores()
     min_score,max_score,average_score=calculate_statistics(student_scores)
     print_statistics(min_score,max_score,average_score)
+    use_ai = input("是否使用 AI 分析？(y/n)：")
+
+    if use_ai.lower() == "y":
+        from ai_analyzer import analyze_scores_with_ai
+
+        ai_result = analyze_scores_with_ai(student_scores)
+        print("\nAI 分析结果：")
+        print(ai_result)
 
 
 if __name__ == "__main__":
     main()
+
+
 
