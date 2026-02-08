@@ -1,6 +1,6 @@
 import pandas as pd
 from input_source import InputSource
-
+from report_writer import save_report
 from analyzer import calculate_statistics, print_statistics
 
 
@@ -18,6 +18,7 @@ def main():
     student_scores=source.get_scores()
     min_score,max_score,average_score=calculate_statistics(student_scores)
     print_statistics(min_score,max_score,average_score)
+
     use_ai = input("是否使用 AI 分析？(y/n)：")
 
     if use_ai.lower() == "y":
@@ -26,6 +27,11 @@ def main():
         ai_result = analyze_scores_with_ai(student_scores)
         print("\nAI 分析结果：")
         print(ai_result)
+
+        save=input("是否保存为分析报告？y/n")
+        if save.lower() == "y":
+            path=save_report(ai_result)
+            print(f"文件已经保存到：{path}")
 
 
 if __name__ == "__main__":
