@@ -5,7 +5,14 @@ from openai import OpenAI
 
 def analyze_scores_with_ai(stats):
     prompt = build_prompt(stats)
-    return call_llm(prompt)
+    ai_summary=call_llm(prompt)
+    if not isinstance(ai_summary, str) or not ai_summary.strip():
+        ai_summary=f"统计结果显示，max: {stats['max']}, min: {stats['min']}, average: {stats['average']}"
+    analysis_result={
+        "stats":stats,
+        "ai_summary":ai_summary
+    }
+    return analysis_result
 
 
 def build_prompt(stats):
